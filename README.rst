@@ -4,6 +4,24 @@ cmdq
 Simple command queue. Given a list of python callable, creates a thread pool to
 unstack them concurrently.
 
+Download
+::::::::
+
+git clone git://github.com/maisonsdumonde/cmdq.git
+cd cmdq
+
+Install in a virtualenv
+:::::::::::::::::::::::
+
+virtualenv .py-env
+. .py-env/bin/activate
+python setup.py develop
+
+Install globally in the system
+::::::::::::::::::::::::::::::
+
+sudo python setup.py install
+
 Syntax
 ::::::
 
