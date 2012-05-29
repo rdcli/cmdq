@@ -1,0 +1,22 @@
+from time import sleep
+
+servers = ResourcePool('server-a', 'server-b')
+
+@servers.use
+def worker1(resource):
+    sleep(1)
+    print 'worker1 using resource "%s"' % (resource, )
+
+@servers.use
+def worker2(resource):
+    sleep(1)
+    print 'worker2 using resource "%s"' % (resource, )
+
+@servers.use
+def worker3(resource):
+    sleep(1)
+    print 'worker3 using resource "%s"' % (resource, )
+
+cmdq = [worker1, worker2, worker3]
+
+# vim: ft=python
