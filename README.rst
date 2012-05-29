@@ -25,14 +25,34 @@ sudo python setup.py install
 Syntax
 ::::::
 
-cmdq config.cmdq
+cmdq example/simple.cmdq
 
 Config
 ::::::
 
 For each command queue, create a .cmdq file using python syntax. The only
 requirement is that it defines a cmdq local containing an iterable of the
-python callables it needs to run. You can look at example.cmdq.
+python callables it needs to run. You can look at examples in example
+directory.
+
+Resource pools
+::::::::::::::
+
+Sometimes, workers share a limited set of resources (for example, slave boxes
+that will run the actual code). You can use a ResourcePool to achieve this. The
+worker will wait for an availabl thread, and an availabl resource, to be run.
+For now, you should avoid to use more than one resource pool for a given
+worker, you may end up in a deadlock situation.
+
+.. code-block:: python
+
+    servers = ResourcePool('web-1', 'web-2')
+
+    @servers.use
+    def my_worker(server):
+        print server
+
+    # ...
 
 License
 :::::::

@@ -8,7 +8,7 @@ class ResourcePool(object):
         if not len(self.resources):
             raise RuntimeError('No resource available in this pool.')
 
-        return self.resources.pop()
+        return self.resources.pop(0)
 
     def push(self, resource):
         self.resources.append(resource)
