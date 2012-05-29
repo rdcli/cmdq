@@ -1,0 +1,16 @@
+from time import sleep
+
+def worker1():
+    sleep(2)
+    print 'worker1'
+
+def worker2():
+    print 'worker2'
+
+def worker3():
+    sleep(1)
+    print 'worker3'
+
+cmdq = [worker1, worker2, worker3]
+
+# vim: ft=python
