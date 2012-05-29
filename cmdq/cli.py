@@ -5,7 +5,6 @@ from time import sleep
 class CommandQueue(object):
     """Class to configure a command queue, that will run `commands`
     concurrently, using a thread pool of `thread_count`.
-
     """
 
     def __init__(self, commands, thread_count=2):
@@ -29,14 +28,15 @@ def main():
 
     parser = ArgumentParser('cmdq')
     parser.add_argument('filename', help='Config filename.')
+    parser.add_argument('--thread-count', type=int, default=2, help='Thread count.')
     args = parser.parse_args()
 
     with open(args.filename) as f:
         code = compile(f.read(), args.filename, 'exec')
-        config = {}
 
+    config = {}
     exec code in config
     if not 'cmdq' in config:
-        raise Exception, 'Please provide a cmdq local in your config file.'
+      raise Exception, 'Please provide a cmdq local in your config file.'
 
-    CommandQueue(commands=config['cmdq']).run()
+    CommandQueue(commands=config['cmdq'], thread_count=args.thread_count).run()
