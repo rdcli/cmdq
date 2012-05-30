@@ -41,7 +41,9 @@ class ResourcePool(object):
         def wrapper():
             while not len(self): sleep(1)
             resource = self.pop()
+            print '>>> LOCK resource "%r".' % (resource, )
             retval = wrapped(resource)
+            print '>>> UNLOCK resource "%r".' % (resource, )
             self.push(resource)
             return retval
 
