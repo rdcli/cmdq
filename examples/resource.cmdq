@@ -2,7 +2,13 @@
 
 from time import sleep
 
-servers = ResourcePool('server-a', 'server-b')
+def _initialize_resource_pool(resource):
+    print 'Initializer of resource "%r".' % (resource, )
+
+def _finalize_resource_pool(resource):
+    print 'Finalizer of resource "%r".' % (resource, )
+
+servers = ResourcePool('server-a', 'server-b', initializer=_initialize_resource_pool, finalizer=_finalize_resource_pool)
 
 @servers.use
 def worker1(resource):

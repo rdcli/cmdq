@@ -33,3 +33,7 @@ def main():
 
     CommandQueue(commands=config['cmdq'], thread_count=args.thread_count).run()
 
+    for name, config_bit in config.iteritems():
+        if isinstance(config_bit, ResourcePool):
+            config_bit.finalize()
+

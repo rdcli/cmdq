@@ -23,3 +23,7 @@ class CommandQueue(object):
                 sleep(1)
                 threads = [thread for thread in threads if thread.is_alive()]
 
+        while len(threads):
+            threads[0].join()
+            threads = [thread for thread in threads if thread.is_alive()]
+
