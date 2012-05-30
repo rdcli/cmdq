@@ -1,13 +1,19 @@
 from argparse import ArgumentParser
 import sys
+from os import system
 
 from .queue import CommandQueue
 from .resource import ResourcePool
 
-def main():
-    """Console script entry point
+def log_decorator(function):
+    def wrapper(*args, **kwargs):
+        print '>>> %s %r %r' % (function.__name__, args, kwargs, )
+        return function(*args, **kwargs)
+    wrapper.__name__ = function.__name__
+    return wrapper
 
-    """
+def main():
+    """Console script entry point"""
 
     parser = ArgumentParser('cmdq')
     parser.add_argument('filename', help='Config filename.')
@@ -17,7 +23,10 @@ def main():
     with open(args.filename) as f:
         code = compile(f.read(), args.filename, 'exec')
 
-    config = {'ResourcePool': ResourcePool}
+    config = {
+        'ResourcePool': ResourcePool,
+        'system': log_decorator(system),
+    }
 
     try:
         exec code in config
