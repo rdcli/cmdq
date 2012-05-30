@@ -1,3 +1,5 @@
+#!/usr/bin/env cmdq
+
 from time import sleep
 
 servers = ResourcePool('server-a', 'server-b')

@@ -1,3 +1,5 @@
+#!/usr/bin/env cmdq
+
 from time import sleep
 
 def worker1():
