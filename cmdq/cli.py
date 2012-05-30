@@ -17,7 +17,7 @@ def main():
 
     parser = ArgumentParser('cmdq')
     parser.add_argument('filename', help='Config filename.')
-    parser.add_argument('--thread-count', type=int, default=8, help='Thread count.')
+    parser.add_argument('--thread-count', type=int, default=4, help='Thread count.')
     args = parser.parse_args()
 
     with open(args.filename) as f:
