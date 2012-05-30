@@ -11,13 +11,13 @@ class ResourcePool(object):
     def initialize(self):
         if callable(self.initializer):
             for resource in self.resources:
-                print '>>> Initialize resource "%r".' % resource
+                print '>>> Initialize resource "%r".' % (resource, )
                 self.initializer(resource)
 
     def finalize(self):
         if callable(self.finalizer):
             for resource in self.resources:
-                print '>>> Finalize resource "%r".' % resource
+                print '>>> Finalize resource "%r".' % (resource, )
                 self.finalizer(resource)
 
     def pop(self):
