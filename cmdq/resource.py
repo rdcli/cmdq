@@ -6,8 +6,6 @@ class ResourcePool(object):
         self.initializer = 'initializer' in kwargs and kwargs['initializer'] or None
         self.finalizer = 'finalizer' in kwargs and kwargs['finalizer'] or None
 
-        self.initialize()
-
     def initialize(self):
         if callable(self.initializer):
             for resource in self.resources:

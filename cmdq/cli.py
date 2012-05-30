@@ -40,9 +40,16 @@ def main():
     if not 'cmdq' in config:
       raise Exception, 'Please provide a cmdq local in your config file.'
 
+    # initialization
+    commands = [config_bit.initialize for name, config_bit in config.iteritems() if isinstance(config_bit, ResourcePool)]
+    if len(commands):
+        CommandQueue(commands=commands, thread_count=args.thread_count).run()
+
+    # actual command queue
     CommandQueue(commands=config['cmdq'], thread_count=args.thread_count).run()
 
-    for name, config_bit in config.iteritems():
-        if isinstance(config_bit, ResourcePool):
-            config_bit.finalize()
+    # finalization
+    commands = [config_bit.finalize for name, config_bit in config.iteritems() if isinstance(config_bit, ResourcePool)]
+    if len(commands):
+        CommandQueue(commands=commands, thread_count=args.thread_count).run()
 
