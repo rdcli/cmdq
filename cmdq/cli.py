@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+import sys
 
 from .queue import CommandQueue
 from .resource import ResourcePool
@@ -17,7 +18,16 @@ def main():
         code = compile(f.read(), args.filename, 'exec')
 
     config = {'ResourcePool': ResourcePool}
-    exec code in config
+
+    try:
+        exec code in config
+    except Exception, e:
+        print 'A %s happened while parsing your configuration file.' % (e.__class__.__name__, )
+        print 'Message: %s' % (e.message, )
+        print
+        raise
+        sys.exit(1)
+
     if not 'cmdq' in config:
       raise Exception, 'Please provide a cmdq local in your config file.'
 
