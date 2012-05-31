@@ -4,6 +4,12 @@ cmdq
 Simple command queue. Given a list of python callable, creates a thread pool to
 unstack them concurrently.
 
+The only dependency it has is python2.7 and python-setuptools. To install in on
+an ubuntu system for example, use the following::
+
+    apt-get install -y python2.7 python-setuptools
+    update-alternatives --install /usr/bin/python python2.7 /usr/bin/python2.7 10
+
 Download
 ::::::::
 
