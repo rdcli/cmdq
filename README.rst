@@ -48,9 +48,7 @@ Sometimes, workers share a limited set of resources (for example, slave boxes
 that will run the actual code). You can use a ResourcePool to achieve this. The
 worker will wait for an availabl thread, and an availabl resource, to be run.
 For now, you should avoid to use more than one resource pool for a given
-worker, you may end up in a deadlock situation.
-
-.. code:: python
+worker, you may end up in a deadlock situation::
 
     servers = ResourcePool('web-1', 'web-2')
 
