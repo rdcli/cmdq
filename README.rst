@@ -41,6 +41,10 @@ Run a cmdq file::
 
     cmdq example/simple.cmdq
 
+For cmdq file syntax, it's mostly python, and loader looks for a "cmdq"
+attribute which must be a list of your python callables to dispatch in
+threads.
+
 Config
 ::::::
 
@@ -65,6 +69,18 @@ worker, you may end up in a deadlock situation::
         print server
 
     # ...
+
+Global initializer/finalizer
+::::::::::::::::::::::::::::
+
+Sometimes it's handy to execute something before any cmdq is started, or after
+all cmdq finished execution::
+
+    def initialize():
+        system('echo I am the first!')
+
+    def finalize():
+        system('echo I am the last!')
 
 License
 :::::::
