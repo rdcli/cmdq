@@ -13,11 +13,15 @@ an ubuntu system for example, use the following::
 Download
 ::::::::
 
+From github::
+
     git clone git://github.com/maisonsdumonde/cmdq.git
     cd cmdq
 
 Install in a virtualenv
 :::::::::::::::::::::::
+
+Isolating your cmdq in a virtualenv is highly encouraged::
 
     virtualenv .py-env
     . .py-env/bin/activate
@@ -26,10 +30,14 @@ Install in a virtualenv
 Install globally in the system
 ::::::::::::::::::::::::::::::
 
+No fear? Install globally::
+
     sudo python setup.py install
 
 Syntax
 ::::::
+
+Run a cmdq file::
 
     cmdq example/simple.cmdq
 
