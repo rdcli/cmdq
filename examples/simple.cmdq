@@ -15,4 +15,10 @@ def worker3():
 
 cmdq = [worker1, worker2, worker3]
 
+def initialize():
+    system('echo initializer')
+
+def finalize():
+    system('echo finalizer')
+
 # vim: ft=python

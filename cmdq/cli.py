@@ -18,18 +18,23 @@ def generate_script(config, thread_count):
 
     """
 
-    # Prepare initializable stuff.
+    # Prepare initializable resources.
     initializable_commands = [config_bit.initialize for name, config_bit in
             config.iteritems() if isinstance(config_bit, ResourcePool)]
     initializable_commands_count = len(initializable_commands)
 
-    # Prepare finalizable stuff.
+    # Prepare finalizable resources.
     finalizable_commands = [config_bit.finalize for name, config_bit in
             config.iteritems() if isinstance(config_bit, ResourcePool)]
     finalizable_commands_count = len(finalizable_commands)
 
     def script():
-        # Actual initialization.
+        # Global initializer.
+        if 'initialize' in config:
+            print '>>> Global initializer'
+            config['initialize']()
+
+        # Actual initialization of resources, paralelized.
         if initializable_commands_count:
             print '>>> Initialize resources (%d steps)' % (initializable_commands_count, )
             CommandQueue(commands=initializable_commands, thread_count=thread_count).run()
@@ -37,10 +42,15 @@ def generate_script(config, thread_count):
         # Actual command queue.
         CommandQueue(commands=config['cmdq'], thread_count=thread_count).run()
 
-        # Actual finalization.
+        # Actual finalization of resources, paralelized.
         if finalizable_commands_count:
             print '>>> finalize resources (%d steps)' % (finalizable_commands_count, )
             CommandQueue(commands=finalizable_commands, thread_count=thread_count).run()
+
+        # Global finalizer.
+        if 'finalize' in config:
+            print '>>> Global finalizer'
+            config['finalize']()
 
     return script
 
