@@ -13,25 +13,25 @@ an ubuntu system for example, use the following::
 Download
 ::::::::
 
-git clone git://github.com/maisonsdumonde/cmdq.git
-cd cmdq
+    git clone git://github.com/maisonsdumonde/cmdq.git
+    cd cmdq
 
 Install in a virtualenv
 :::::::::::::::::::::::
 
-virtualenv .py-env
-. .py-env/bin/activate
-python setup.py develop
+    virtualenv .py-env
+    . .py-env/bin/activate
+    python setup.py develop
 
 Install globally in the system
 ::::::::::::::::::::::::::::::
 
-sudo python setup.py install
+    sudo python setup.py install
 
 Syntax
 ::::::
 
-cmdq example/simple.cmdq
+    cmdq example/simple.cmdq
 
 Config
 ::::::
